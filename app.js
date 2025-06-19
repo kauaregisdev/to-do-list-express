@@ -2,13 +2,15 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const authRoutes = require('./routers/authRoutes');
-const taskRoutes = require('./routers/taskRoutes');
+const adminRoutes = require('./routes/admin');
+const authRoutes = require('./routes/auth');
+const taskRoutes = require('./routes/task');
 const connectDatabase = require('./config/database');
 
 app.use(express.json());
 
 (async () => {
+    app.use('/admin', adminRoutes);
     app.use('/auth', authRoutes);
     app.use('/tasks', taskRoutes);
 
