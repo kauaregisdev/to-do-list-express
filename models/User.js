@@ -24,4 +24,12 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+userSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        delete ret.password;
+        delete ret.__v;
+        return ret;
+    }
+});
+
 module.exports = mongoose.model('User', userSchema);
