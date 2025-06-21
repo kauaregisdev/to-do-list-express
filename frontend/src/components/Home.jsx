@@ -1,8 +1,8 @@
 export default function Home() {
 return (
         <div className="home">
-            <h1>Seja bem-vindo ao sistema de controle de tarefas!</h1>
-            <h2>Como funciona?</h2>
+            <h1 className="text-3xl font-bold">Seja bem-vindo ao sistema de controle de tarefas!</h1>
+            <h2 className="text-2xl font-bold">Como funciona?</h2>
             <div className="home-guia">
                 <p>Acesse a aba de login para poder acessar a galeria, clicando em "Login" logo acima.</p>
                 <p>Insira um usuário e uma senha, depois clique em "Entrar". Se a autenticação funcionar, você deve visualizar uma mensagem de sucesso e um botão "Logout".</p>

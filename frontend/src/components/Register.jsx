@@ -34,7 +34,7 @@ export default function Register() {
 
     return (
         <form id="register-form" onSubmit={handleSubmit}>
-            <h2>Registro de usuários</h2>
+            <h2 className="text-2xl font-bold">Registro de usuários</h2>
             <input
                 type="text"
                 name="username"

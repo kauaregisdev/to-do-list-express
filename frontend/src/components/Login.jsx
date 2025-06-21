@@ -23,7 +23,7 @@ export default function Login() {
 
     return (
         <form id="form-login" onSubmit={handleSubmit}>
-            <h2>Login</h2>
+            <h2 className="text-2xl font-bold">Login</h2>
             <input
                 type="text"
                 placeholder="Usuário:"

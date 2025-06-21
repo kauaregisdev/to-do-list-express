@@ -7,7 +7,7 @@ import RegisterPage from './pages/Register';
 import HomePage from './pages/Home';
 import DashboardPage from './pages/Dashboard';
 import NotFoundPage from './pages/NotFound';
-import './styles/App.css';
+import './styles/index.css';
 
 export default function App() {
   return (

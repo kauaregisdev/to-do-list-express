@@ -60,7 +60,7 @@ export default function TaskList() {
 
     return (
         <div id="lista-tarefas" className="lista-tarefas">
-            <h2 id="lista-tarefas-title">Tarefas existentes</h2>
+            <h2 id="lista-tarefas-title" className="text-2xl font-bold">Tarefas existentes</h2>
             <ul id="tarefas">
                 {tasks.map((task) => (
                     <TaskCard
