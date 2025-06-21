@@ -26,6 +26,7 @@ async function postTask(req, res) {
 
 async function putTask(req, res) {
     try {
+        const {title, done} = req.body;
         const task = await Task.findOneAndUpdate({
             _id: req.params.id,
             owner: req.userId
