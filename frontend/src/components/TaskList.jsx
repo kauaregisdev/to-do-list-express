@@ -39,16 +39,15 @@ export default function TaskList() {
             let token = localStorage.getItem('token');
             if (!token) {
                 token = await getToken('admin', 'admin123');
-                localStorage.setItem('token', token);
             }
-            api.delete(`images/${id}/`, {
+            api.delete(`tasks/${id}/`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
             .then(() => {
                 alert('Tarefa excluída com sucesso!');
-                setTasks(tasks.filter(task => task.id !== id));
+                setTasks(tasks.filter(task => task._id !== id));
             })
             .catch(err => {
                 alert('Erro ao excluir tarefa.');
@@ -67,7 +66,7 @@ export default function TaskList() {
                     <TaskCard
                         key={task.id}
                         task={task}
-                        onRemover={() => deletarTarefa(task.id)}
+                        onRemover={() => deletarTarefa(task._id)}
                     />
                 ))}
             </ul>
