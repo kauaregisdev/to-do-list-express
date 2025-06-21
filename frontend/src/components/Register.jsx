@@ -24,7 +24,7 @@ export default function Register() {
             setMessage('Usuário registrado com sucesso!');
             let token = await api.post('auth/login', formData);
             localStorage.setItem('token', token);
-            navigate('/dashboard');
+            navigate('/tasks');
         } catch (err) {
             setMessage(
                 err.response?.data?.message || 'Erro ao registrar usuário.'
