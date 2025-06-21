@@ -59,8 +59,8 @@ export default function TaskList() {
     if (loading) return <p id="loading">Carregando tarefas...</p>;
 
     return (
-        <div id="lista-tarefas" className="lista-tarefas">
-            <h2 id="lista-tarefas-title" className="text-2xl font-bold">Tarefas existentes</h2>
+        <div className="max-w-2xl mx-auto py-8">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Tarefas existentes</h2>
             <ul id="tarefas">
                 {tasks.map((task) => (
                     <TaskCard
@@ -70,7 +70,7 @@ export default function TaskList() {
                     />
                 ))}
             </ul>
-            <h2 id="form-task-title">Enviar tarefa</h2>
+            <h2 className="text-2xl font-bold mt-8 mb-4 text-gray-800">Enviar tarefa</h2>
             <TaskForm onUpload={carregarTarefas} />
         </div>
     );

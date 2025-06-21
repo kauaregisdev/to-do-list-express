@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import HomePage from './pages/Home';
-import DashboardPage from './pages/Dashboard';
+import TaskListPage from './pages/TaskList';
 import NotFoundPage from './pages/NotFound';
 import './styles/index.css';
 
@@ -17,7 +17,7 @@ export default function App() {
           <Route path='/' element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route element={<PrivateRoute />}>
-              <Route path='/dashboard' element={<DashboardPage />} />
+              <Route path='/tasks' element={<TaskListPage />} />
             </Route>
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
