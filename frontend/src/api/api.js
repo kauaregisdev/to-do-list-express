@@ -1,20 +1,20 @@
 import axios from 'axios';
 
-export async function getTokenData(username, password) {
-    const res = await axios.post(import.meta.env.VITE_API_URL + '/api/token', {
+export async function getToken(username, password) {
+    const res = await axios.post('http://localhost:3000/auth/login', {
         username,
         password
     });
-    return res.data;
+    return res.data.token;
 }
 
-const api = axios.create({
+export const api = axios.create({
     baseURL: 'http://localhost:3000/'
 });
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access');
+        const token = localStorage.getItem('token');
         if (token) config.headers.Authorization = `Bearer ${token}`;
         return config;
     },
@@ -36,8 +36,8 @@ api.interceptors.response.use(
                     username: 'admin',
                     password: 'admin123'
                 });
-                localStorage.setItem('access', res.data.access);
-                originalRequest.headers.Authorization = `Bearer ${res.data.access}`;
+                localStorage.setItem('token', res.data.token);
+                originalRequest.headers.Authorization = `Bearer ${res.data.token}`;
                 return api(originalRequest);
             } catch (refreshError) {
                 alert('Erro de autenticação.');

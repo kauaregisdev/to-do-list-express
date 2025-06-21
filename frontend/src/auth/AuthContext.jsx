@@ -3,28 +3,23 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-    const [access, setAccess] = useState(localStorage.getItem('access'));
-    const [refresh, setRefresh] = useState(localStorage.getItem('refresh'));
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
-    const isAuthenticated = !!access;
+    const isAuthenticated = !!token;
 
-    function login(accessToken, refreshToken) {
-        setAccess(accessToken);
-        setRefresh(refreshToken);
-        localStorage.setItem('access', accessToken);
-        localStorage.setItem('refresh', refreshToken);
+    function login(accessToken) {
+        setToken(accessToken);
+        localStorage.setItem('token', accessToken);
     }
 
     function logout() {
-        setAccess(null);
-        setRefresh(null);
-        localStorage.removeItem('access');
-        localStorage.removeItem('refresh');
+        setToken(null);
+        localStorage.removeItem('token');
         window.location.href = '/login';
     }
 
     return (
-        <AuthContext.Provider value={{ access, refresh, isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ token, isAuthenticated, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
