@@ -56,7 +56,7 @@ export default function TaskForm({onUpload}) {
                 <option value="pendente">Pendente</option>
                 <option value="concluida">Concluída</option>
             </select>
-            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Enviar tarefa</button>
+            <button type="submit" className="bg-blue-600 text-white px-4 py-2 cursor-pointer rounded hover:bg-blue-700 transition">Enviar tarefa</button>
         </form>
     );
 }
