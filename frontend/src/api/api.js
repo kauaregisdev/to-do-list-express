@@ -1,7 +1,8 @@
 import axios from 'axios';
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 export async function getToken(username, password) {
-    const res = await axios.post('http://localhost:3000/auth/login', {
+    const res = await axios.post(VITE_API_URL + 'auth/login', {
         username,
         password
     });
@@ -9,7 +10,7 @@ export async function getToken(username, password) {
 }
 
 export const api = axios.create({
-    baseURL: 'http://localhost:3000/'
+    baseURL: VITE_API_URL
 });
 
 api.interceptors.request.use(
@@ -32,7 +33,7 @@ api.interceptors.response.use(
         ) {
             originalRequest._retry = true;
             try {
-                const res = await axios.post('http://localhost:8000/token', {
+                const res = await axios.post(VITE_API_URL + 'auth/login', {
                     username: 'admin',
                     password: 'admin123'
                 });

@@ -11,7 +11,7 @@ const connectDatabase = require('./config/database');
 
 (async () => {
     app.use(cors({
-        origin: 'http://localhost:5173',
+        origin: process.env.CORS_ALLOWED_ORIGINS,
         credentials: true
     }));
     app.use(express.json());
