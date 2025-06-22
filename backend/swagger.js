@@ -22,8 +22,37 @@ const options = {
                     bearerFormat: 'JWT'
                 },
             },
+            schemas: {
+                TaskInput: {
+                    type: 'object',
+                    required: ['title', 'done'],
+                    properties: {
+                        title: {
+                            type: 'string',
+                            example: 'Study Express',
+                        },
+                        done: {
+                            type: 'boolean',
+                            example: false,
+                        },
+                    },
+                },
+                AuthInput: {
+                    type: 'object',
+                    required: ['username', 'password'],
+                    properties: {
+                        username: {
+                            type: 'string',
+                            example: 'kaua_regis',
+                        },
+                        password: {
+                            type: 'string',
+                            example: '123456'
+                        },
+                    },
+                },
+            },
         },
-        security: [{bearerAuth: []}],
     },
     apis: ['./routes/*.js']
 };
