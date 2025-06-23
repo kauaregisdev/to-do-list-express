@@ -24,5 +24,5 @@ const connectDatabase = require('./config/database');
     await connectDatabase();
 
     console.log('Running server...');
-    app.listen(3000, () => console.log('✅ Server running at http://localhost:3000\nSwagger docs: http://localhost:3000/api-docs'));
+    app.listen(process.env.PORT, () => console.log('✅ Server running at http://localhost:3000\nSwagger docs: http://localhost:3000/api-docs'));
 })();

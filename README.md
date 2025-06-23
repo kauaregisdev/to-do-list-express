@@ -1,150 +1,165 @@
-# 🗂️ To-Do List API (Express + MongoDB)
+# 📝 To-Do List App — Full Stack (React + Express + MongoDB)
 
-API RESTful para gerenciamento de tarefas, com autenticação JWT, permissões de usuário e documentação interativa via Swagger.
+Este é um projeto full stack para gerenciamento de tarefas (to-do list), com autenticação JWT, painel de administração e front-end estilizado com Tailwind CSS.
+
+---
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Node.js + Express 5**
-- **MongoDB + Mongoose**
-- **JWT** para autenticação
-- **Bcrypt** para hash de senhas
-- **Swagger UI** para documentação de API
-- **dotenv** para variáveis de ambiente
-- **CORS** configurado dinamicamente via `.env`
+### 🔧 Backend (Node.js + Express)
+- Express 5
+- MongoDB + Mongoose
+- JWT (Autenticação)
+- Bcrypt (Hash de senhas)
+- Swagger (Documentação da API)
+- dotenv e CORS
 
-## 📁 Estrutura do Projeto
+### 🌐 Frontend (React + Vite)
+- React + React Router DOM
+- Axios
+- Tailwind CSS
+- ESLint
+- Vite.js
+
+---
+
+## 🔐 Funcionalidades
+
+- Cadastro e login de usuários com JWT
+- Criação, edição e exclusão de tarefas
+- Diferenciação entre usuário comum e administrador
+- Interface moderna e responsiva
+- Integração completa entre front-end e back-end
+- Documentação Swagger acessível via navegador
+
+---
+
+## 📂 Estrutura de Pastas
 
 ```
-📦 to-do-list-express
-├── app.js               # Inicialização da API
-├── swagger.js           # Configuração do Swagger
-├── package.json         # Dependências e scripts
+📦 backend/
+├── app.js
+├── .env
 ├── /config
-│   └── database.js      # Conexão com MongoDB
 ├── /controllers
-│   ├── auth.js          # Login e registro
-│   ├── task.js          # Operações de tarefas
-│   └── admin.js         # Operações de admin
 ├── /middlewares
-│   └── auth.js          # Verificação de token JWT
 ├── /models
-│   ├── Task.js
-│   └── User.js
 ├── /routes
-│   ├── auth.js
-│   ├── task.js
-│   └── admin.js
+├── swagger.js
+└── package.json
+
+📦 frontend/
+├── index.html
+├── vite.config.js
+├── eslint.config.js
+├── .env.production
+├── /src
+│   ├── main.jsx
+│   ├── App.jsx
+│   ├── /api
+│   ├── /auth
+│   ├── /pages
+│   ├── /components
+│   └── /styles
+└── package.json
 ```
 
-## 🔐 Autenticação
+---
 
-Após realizar o login, o usuário recebe um token JWT que deve ser enviado no header das requisições protegidas:
+## ⚙️ Como Executar o Projeto
 
-```
-Authorization: Bearer <seu_token_aqui>
-```
-
-## 📄 Documentação Swagger
-
-Acesse a documentação interativa da API em:
-
-📍 [`http://localhost:3000/api-docs`](http://localhost:3000/api-docs)
-
-O Swagger já define os schemas de autenticação (`AuthInput`) e de tarefas (`TaskInput`), além de usar o esquema `bearerAuth` com JWT.
-
-## 🔧 Como Rodar o Projeto
-
-### 1. Pré-requisitos
-
-- Node.js `v18+`
-- MongoDB local ou MongoDB Atlas
-- Editor de código (VS Code recomendado)
-
-### 2. Instalação
+### 1. Clonar o repositório e acessar as pastas:
 
 ```bash
 git clone https://github.com/kauaregisdev/to-do-list-express
-cd to-do-list-express
-npm install
+cd backend
 ```
 
-### 3. Arquivo `.env`
+### 2. Configurar o Back-end
 
-Crie um arquivo `.env` na raiz com as seguintes variáveis:
-
+#### 🔧 Variáveis de Ambiente (`backend/.env`)
 ```
 PORT=3000
-JWT_SECRET=sua_chave_jwt_aqui
-MONGODB_URI=mongodb://localhost:27017/todolist
+MONGODB_URI=mongodb+srv://db_user:dbuser123@cluster0.a6xnwiu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=sua_chave_jwt
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
 
-> Dica: altere `CORS_ALLOWED_ORIGINS` conforme a origem do seu front-end React.
-
-### 4. Executar o servidor
-
+#### 🔨 Instalar dependências e iniciar:
 ```bash
+npm install
 node app.js
-# ou com nodemon (caso tenha instalado)
-nodemon app.js
 ```
 
-A aplicação estará disponível em: [http://localhost:3000](http://localhost:3000)
+A API estará disponível em: `http://localhost:3000`  
+Swagger: `http://localhost:3000/api-docs`
 
 ---
 
-## 🔁 Principais Rotas
+### 3. Configurar o Front-end
+
+#### 🔧 Variáveis de Ambiente (`frontend/.env.production`)
+```
+VITE_API_URL=http://localhost:3000/
+```
+
+#### 🔨 Instalar dependências e iniciar:
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+A interface estará acessível em: `http://localhost:5173`
+
+> O front-end está pré-configurado para se comunicar com a API em `http://localhost:3000`.
+
+---
+
+## 🔁 Rotas da API
 
 ### Auth
 
-| Método | Rota             | Protegida | Descrição                      |
-|--------|------------------|-----------|-------------------------------|
-| POST   | `/auth/register` | ❌        | Cadastro de usuário           |
-| POST   | `/auth/login`    | ❌        | Login e retorno de token JWT  |
+| Método | Rota             | Protegida | Descrição             |
+|--------|------------------|-----------|------------------------|
+| POST   | /auth/register   | ❌        | Criar novo usuário     |
+| POST   | /auth/login      | ❌        | Login e geração de JWT |
 
-### Tarefas (usuário logado)
+### Tarefas
 
-| Método | Rota            | Protegida | Descrição                  |
+| Método | Rota            | Protegida | Descrição                |
 |--------|-----------------|-----------|---------------------------|
-| GET    | `/tasks/`       | ✅        | Lista tarefas do usuário  |
-| POST   | `/tasks/`       | ✅        | Cria nova tarefa          |
-| PUT    | `/tasks/:id`    | ✅        | Atualiza tarefa           |
-| DELETE | `/tasks/:id`    | ✅        | Remove tarefa             |
+| GET    | /tasks/         | ✅        | Listar tarefas do usuário |
+| POST   | /tasks/         | ✅        | Criar nova tarefa         |
+| PUT    | /tasks/:id      | ✅        | Atualizar tarefa          |
+| DELETE | /tasks/:id      | ✅        | Deletar tarefa            |
 
 ### Admin
 
-| Método | Rota             | Protegida | Descrição                     |
-|--------|------------------|-----------|------------------------------|
-| GET    | `/admin/tasks`   | ✅ (admin) | Lista todas as tarefas       |
-| GET    | `/admin/users`   | ✅ (admin) | Lista todos os usuários      |
+| Método | Rota            | Protegida (admin) | Descrição                      |
+|--------|------------------|-------------------|-------------------------------|
+| GET    | /admin/tasks     | ✅                | Listar todas as tarefas        |
+| GET    | /admin/users     | ✅                | Listar todos os usuários       |
 
 ---
 
-## ✅ Exemplos de Requisição
+## 📄 Swagger
 
-### Registro
+A documentação da API está disponível em:
 
-```bash
-curl -X POST http://localhost:3000/auth/register -H "Content-Type: application/json" -d '{"username": "kaua_regis", "password": "123456"}'
-```
-
-### Login
-
-```bash
-curl -X POST http://localhost:3000/auth/login -H "Content-Type: application/json" -d '{"username": "kaua_regis", "password": "123456"}'
-```
+👉 [`http://localhost:3000/api-docs`](http://localhost:3000/api-docs)
 
 ---
 
-## 📌 Notas Finais
+## ✨ Extras
 
-- O projeto diferencia usuários comuns e administradores via `role` no JWT.
-- O campo `done` da tarefa é tratado para aceitar booleanos ou strings numéricas.
-- Swagger facilita testes e integração com front-end.
-- Front-end sugerido: React (já configurado no CORS).
+- Front-end usa Tailwind e Vite para uma UI leve e responsiva.
+- O `axios` está configurado para enviar o token JWT automaticamente após login.
+- O sistema diferencia permissões via `role` no token JWT.
+- CORS está configurado dinamicamente para integração local com o React.
 
 ---
 
 ## 👨‍💻 Autor
 
-Projeto desenvolvido por [Kauã Régis](https://github.com/kauaregisdev)
+Desenvolvido por [Kauã Régis](https://github.com/kauaregisdev)
